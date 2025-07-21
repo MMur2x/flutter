@@ -39,6 +39,7 @@ class Stock {
 }
 
 class StockData extends ChangeNotifier {
+  static bool actuallyFetchData = true;
   StockData() {
     if (actuallyFetchData) {
       _httpClient = http.Client();
@@ -73,7 +74,7 @@ class StockData extends ChangeNotifier {
 
   http.Client? _httpClient;
 
-  static bool actuallyFetchData = true;
+
 
   void _fetchNextChunk() {
     _httpClient!.get(_urlToFetch(_nextChunk++)).then<void>((http.Response response) {

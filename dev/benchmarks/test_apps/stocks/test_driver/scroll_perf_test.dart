@@ -1,18 +1,17 @@
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-import 'dart:async';
-
-import 'package:flutter_driver/flutter_driver.dart';
-import 'package:test/test.dart' hide TypeMatcher, isInstanceOf;
+import 'package:flutter_driver/flutter_driver.dart' as flutter_driver;
+import 'package:flutter_driver/flutter_driver.dart' show Timeline, TimelineSummary;
+import 'package:flutter_test/flutter_test.dart' as flutter_test;
+import 'package:flutter_test/flutter_test.dart' hide TypeMatcher, isInstanceOf;
 
 void main() {
   group('scrolling performance test', () {
-    late FlutterDriver driver;
+    late flutter_driver.FlutterDriver driver;
 
     setUpAll(() async {
-      driver = await FlutterDriver.connect();
+      driver = await flutter_driver.FlutterDriver.connect();
     });
 
     tearDownAll(() async {
@@ -22,8 +21,8 @@ void main() {
     test('measure', () async {
       final Timeline timeline = await driver.traceAction(() async {
         // Find the scrollable stock list
-        final SerializableFinder stockList = find.byValueKey('stock-list');
-        expect(stockList, isNotNull);
+        final flutter_driver.SerializableFinder stockList = flutter_driver.find.byValueKey('stock-list');
+        flutter_test.expect(stockList, flutter_test.isNotNull);
 
         // Scroll down
         for (int i = 0; i < 5; i++) {

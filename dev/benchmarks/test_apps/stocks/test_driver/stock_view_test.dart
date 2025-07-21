@@ -4,15 +4,15 @@
 
 import 'dart:async';
 
-import 'package:flutter_driver/flutter_driver.dart';
-import 'package:test/test.dart' hide TypeMatcher, isInstanceOf;
+import 'package:flutter_driver/flutter_driver.dart' as fd;
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('basic stock view test', () {
-    late FlutterDriver driver;
+    late fd.FlutterDriver driver;
 
     setUpAll(() async {
-      driver = await FlutterDriver.connect();
+      driver = await fd.FlutterDriver.connect();
     });
 
     tearDownAll(() async {
@@ -20,23 +20,23 @@ void main() {
     });
 
     test('Stock list is shown', () async {
-      final SerializableFinder stockList = find.byValueKey('stock-list');
+      final fd.SerializableFinder stockList = fd.find.byValueKey('stock-list');
       expect(stockList, isNotNull);
     }, timeout: Timeout.none);
 
     test(
       'open AAPL stock',
       () async {
-        final SerializableFinder stockList = find.byValueKey('stock-list');
+        final fd.SerializableFinder stockList = fd.find.byValueKey('stock-list');
         expect(stockList, isNotNull);
 
-        final SerializableFinder aaplStockRow = find.byValueKey('AAPL');
+        final fd.SerializableFinder aaplStockRow = fd.find.byValueKey('AAPL');
         await driver.scrollUntilVisible(stockList, aaplStockRow);
 
         await driver.tap(aaplStockRow);
         await Future<void>.delayed(const Duration(milliseconds: 500));
 
-        final SerializableFinder stockOption = find.byValueKey('AAPL_symbol_name');
+        final fd.SerializableFinder stockOption = fd.find.byValueKey('AAPL_symbol_name');
         final String symbol = await driver.getText(stockOption);
 
         expect(symbol, 'AAPL');
