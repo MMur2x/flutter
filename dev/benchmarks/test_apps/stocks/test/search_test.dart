@@ -4,8 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stocks/main.dart' as stocks;
-import 'package:stocks/stock_data.dart' as stock_data;
+import 'package:stocks/screens/main.dart' as stocks;
+import 'package:stocks/screens/stock_data.dart' as stock_data;
+import 'package:stocks/screens/stock.dart' as stocks;
 
 void main() {
   stock_data.StockData.actuallyFetchData = false;
@@ -21,7 +22,7 @@ void main() {
     final stocks.StocksAppState app = tester.state<stocks.StocksAppState>(
       find.byType(stocks.StocksApp),
     );
-    app.stocks.add(<List<String>>[
+    app.stocks.addAll(<List<String>>[
       // "Symbol","Name","LastSale","MarketCap","IPOyear","Sector","industry","Summary Quote"
       <String>['AAPL', 'Apple', '', '', '', '', '', ''],
       <String>['BANA', 'Banana', '', '', '', '', '', ''],
