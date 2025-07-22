@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stocks/screens/main.dart' as stocks;
 import 'package:stocks/screens/stock_data.dart' as stock_data;
-import 'package:stocks/screens/stock.dart' as stocks;
+import 'package:stocks/screens/stock.dart' as stocks hide main;
+
 
 void main() {
   stock_data.StockData.actuallyFetchData = false;
 
   testWidgets('Search', (WidgetTester tester) async {
     stocks.main(); // builds the app and schedules a frame but doesn't trigger one
-    await tester.pump(); // see https://github.com/flutter/flutter/issues/1865
+    await tester.pump(); // see https://github.com/flutter/flutter/issues/1865fo
     await tester.pump(); // triggers a frame
 
     expect(find.text('AAPL'), findsNothing);
