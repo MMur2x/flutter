@@ -2,10 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:stocks/screens/main.dart' as stocks;
+import 'package:stocks/screens/stock_data.dart' as stock_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stocks/main.dart' as stocks;
-import 'package:stocks/stock_data.dart' as stock_data;
+
+
 
 Element? findElementOfExactWidgetTypeGoingDown(Element node, Type targetType) {
   void walker(Element child) {
@@ -46,9 +48,9 @@ void checkIconColor(WidgetTester tester, String label, Color color) {
 }
 
 void main() {
-  stock_data.StockData.actuallyFetchData = false;
-
   testWidgets('Icon colors', (WidgetTester tester) async {
+    stock_data.StockData.actuallyFetchData = false;
+    
     stocks.main(); // builds the app and schedules a frame but doesn't trigger one
     await tester.pump(); // see https://github.com/flutter/flutter/issues/1865
     await tester.pump(); // triggers a frame
